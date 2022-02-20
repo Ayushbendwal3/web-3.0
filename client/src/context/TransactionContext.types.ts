@@ -1,5 +1,3 @@
-import { SetStateAction } from 'react';
-
 export type formDataType = {
   addressTo: string;
   amount: string;
@@ -13,4 +11,19 @@ export interface TransactionContextType {
   formData: formDataType;
   setFormData: React.Dispatch<React.SetStateAction<formDataType>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>, name: string) => void;
+  sendTransaction: () => void;
 }
+
+export const defaultValues = {
+  handleChange: () => {},
+  formData: {
+    addressTo: '',
+    amount: '',
+    keyword: '',
+    message: ''
+  },
+  setFormData: () => {},
+  currentAccount: '',
+  connectWallet: () => {},
+  sendTransaction: () => {}
+};

@@ -5,14 +5,22 @@ import { BsInfoCircle } from 'react-icons/bs';
 
 import { TransactionContext } from '../context/TransactionContext';
 import { Loader } from './';
-import { commonStyles, Input } from '../helpers';
+import { commonStyles, Input } from './Input';
 
 const Welcome: React.FC = () => {
-  const { connectWallet, currentAccount, formData, setFormData, handleChange } =
-    useContext(TransactionContext);
+  const {
+    connectWallet,
+    currentAccount,
+    formData,
+    handleChange,
+    sendTransaction
+  } = useContext(TransactionContext);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
     const { addressTo, amount, keyword, message } = formData;
+    if (!addressTo || !amount || !keyword || !message) return;
+    sendTransaction();
   };
 
   return (
