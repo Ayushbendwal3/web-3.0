@@ -6,14 +6,16 @@ import { BsInfoCircle } from 'react-icons/bs';
 import { TransactionContext } from '../context/TransactionContext';
 import { Loader } from './';
 import { commonStyles, Input } from './Input';
+import { shortenAddress } from '../utils/shortenAddress';
 
 const Welcome: React.FC = () => {
   const {
-    connectWallet,
     currentAccount,
-    formData,
+    connectWallet,
     handleChange,
-    sendTransaction
+    sendTransaction,
+    formData,
+    isLoading
   } = useContext(TransactionContext);
 
   const handleSubmit = (e: any) => {
@@ -65,7 +67,9 @@ const Welcome: React.FC = () => {
                 <BsInfoCircle fontSize={17} color="#fff" />
               </div>
               <div>
-                <p className="text-white font-light text-sm">Address</p>
+                <p className="text-white font-light text-sm">
+                  {shortenAddress(currentAccount)}
+                </p>
                 <p className="text-white font-semibold text-lg mt-1">
                   Ethereum
                 </p>
@@ -100,7 +104,7 @@ const Welcome: React.FC = () => {
             />
 
             <div className="h-[1px] w-full bg-gray-400 my-2" />
-            {false ? (
+            {isLoading ? (
               <Loader />
             ) : (
               <button

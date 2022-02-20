@@ -9,12 +9,15 @@ export interface TransactionContextType {
   connectWallet: () => void;
   currentAccount: string;
   formData: formDataType;
-  setFormData: React.Dispatch<React.SetStateAction<formDataType>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>, name: string) => void;
   sendTransaction: () => void;
+
+  transactionCount: string | null;
+  transactions: never[];
+  isLoading: boolean;
 }
 
-export const defaultValues = {
+export const defaultValues: TransactionContextType = {
   handleChange: () => {},
   formData: {
     addressTo: '',
@@ -22,8 +25,10 @@ export const defaultValues = {
     keyword: '',
     message: ''
   },
-  setFormData: () => {},
   currentAccount: '',
+  isLoading: false,
+  transactionCount: '',
+  transactions: [],
   connectWallet: () => {},
   sendTransaction: () => {}
 };
